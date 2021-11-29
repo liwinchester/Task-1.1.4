@@ -2,19 +2,21 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        UserDaoHibernateImpl userDaoHibernate = new UserDaoHibernateImpl();
-        userDaoHibernate.createUsersTable();
-        userDaoHibernate.saveUser("Alisha", "Obelix", (byte) 22);
-        userDaoHibernate.saveUser("Alisia", "Obion", (byte) 25);
-        userDaoHibernate.saveUser("Alistar", "Oboz", (byte) 48);
-        userDaoHibernate.saveUser("Alik", "Obern", (byte) 31);
-        userDaoHibernate.getAllUsers();
-        userDaoHibernate.cleanUsersTable();
-        userDaoHibernate.dropUsersTable();
+        UserService userService = new UserServiceImpl();
+        userService.createUsersTable();
+        userService.saveUser("Alisha", "Obelix", (byte) 22);
+        userService.saveUser("Alisia", "Obion", (byte) 25);
+        userService.saveUser("Alistar", "Oboz", (byte) 48);
+        userService.saveUser("Alik", "Obern", (byte) 31);
+        userService.getAllUsers();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }

@@ -34,8 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             Connection connection = Util.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "DROP TABLE IF EXISTS userProject";
-            statement.executeUpdate(sql);
+            statement.executeUpdate("DROP TABLE IF EXISTS userProject");
             statement.close();
             connection.close();
         } catch (SQLException e) {
@@ -45,10 +44,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age)  {
-        String sql = "INSERT INTO my_database.userproject (id, name, lastname, age) VALUES(NULL, ?, ?, ?)";
         try {
             Connection connection = Util.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO my_database.userproject (id, name, lastname, age) VALUES(NULL, ?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -77,11 +76,10 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM userProject ";
         try {
             Connection connection = Util.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM userProject ");
             while (resultSet.next()){
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
